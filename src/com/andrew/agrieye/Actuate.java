@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 import com.andrew.agrieye.picnic.PicnicConfig;
@@ -26,6 +27,7 @@ public class Actuate extends Activity {
   	FrameLayout frameLayoutLogo;
 	Button btOff;
 	ToggleButton tbLed4,tbLed5,tbLed6,tbLed7;
+  	private TextView tvMonitorStatus;
   	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,37 +38,38 @@ public class Actuate extends Activity {
 		// get current ip address from shared preferences
         getIpAddress = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		etIpSetting = getIpAddress.getString("ip", "192.168.11.224");
-		
+	
 		// pic connect
-		picConfig = new PicnicConfig(etIpSetting);
-				
+		picConfig = new PicnicConfig(etIpSetting);			
 		initObject(); // object initialization method
 		
 		// set check or unchecked for each toggle button
 		// toggle button 4
-		if(picConfig.checkStatus(4) == true) {
+		if(picConfig.checkStatus(4) == "1") {
 			tbLed4.setChecked(true);
-		} else {
-			tbLed4.setChecked(false);
 		}
 		// set toggle button 5
-		if(picConfig.checkStatus(5) == true) {
+		if(picConfig.checkStatus(5) == "1") {
 			tbLed5.setChecked(true);
-		} else {
-			tbLed5.setChecked(false);
 		}
 		// set toggle button 6
-		if(picConfig.checkStatus(6) == true) {
+		if(picConfig.checkStatus(6) == "1") {
 			tbLed6.setChecked(true);
-		} else {
-			tbLed6.setChecked(false);
 		}
 		// set toggle button 7
-		if(picConfig.checkStatus(7) == true) {
-			tbLed7.setChecked(true);
-		} else {
-			tbLed7.setChecked(false);
-		}
+		String hasil7 = picConfig.checkStatus(7);
+		if( hasil7 == "1") {
+			boolean mBool = true;
+			tbLed7.setChecked(mBool);
+		}	
+		// check set text for check status
+		String empat, lima, enam, tujuh;
+		empat = picConfig.checkStatus(4);
+		lima = picConfig.checkStatus(5);
+		enam = picConfig.checkStatus(6);
+		tujuh = picConfig.checkStatus(7);
+		tvMonitorStatus.setText(empat+lima+enam+tujuh);
+		
 		
 		// action for each toogle button
 		
@@ -161,7 +164,7 @@ public class Actuate extends Activity {
 		tbLed6 = (ToggleButton) findViewById(R.id.tbLed6);
 		tbLed7 = (ToggleButton) findViewById(R.id.tbLed7);
 		frameLayoutLogo = (FrameLayout) findViewById(R.id.frameLayoutLogo);
-		
+		tvMonitorStatus = (TextView) findViewById(R.id.tvMonitorStatus);
 	
 	}
 	private void toastOn(int number){		
