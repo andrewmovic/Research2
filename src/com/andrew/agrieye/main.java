@@ -1,5 +1,9 @@
 package com.andrew.agrieye;
 
+/* Main Program v 1.0
+ * January 14, 2012 
+ * andrew@ugm.ac.id */
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,10 +21,14 @@ import com.andrew.agrieye.picnic.PicnicConfig;
 
 public class main extends Activity {
 	/** Called when the activity is first created. */
-	Button btCheckConnectivity,
-	btOff,btStatus, btActuate,
-	btSetting, btSchedule, btSchedule2;	
-	SharedPreferences getIpAddress;
+	private Button btCheckConnectivity;
+	private Button btOff;
+	private Button btStatus;
+	private Button btActuate;
+	private Button btSetting;
+	private Button btSchedule;
+	private Button btSchedule2;	
+	private SharedPreferences getIpAddress;
   	private static String etIpSetting;
   	private TextView tvStatIp;
   	private PicnicConfig picConfig;
@@ -30,21 +38,14 @@ public class main extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        picConfig = new PicnicConfig();
         
+        picConfig = new PicnicConfig();
         // shared preferences
         getIpAddress = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		etIpSetting = getIpAddress.getString("ip", "192.168.11.224");
 		
-		// button declare
-        btCheckConnectivity = (Button) findViewById(R.id.btCheckConnectivity);
-        btOff = (Button) findViewById(R.id.btOff);
-        btStatus = (Button) findViewById(R.id.btStatus);
-        btActuate = (Button) findViewById(R.id.btActuate);
-    	btSetting = (Button) findViewById(R.id.btSetting);
-        btSchedule = (Button) findViewById(R.id.btSchedule);
-        tvStatIp = (TextView) findViewById(R.id.tvStatIp);
-        
+		
+		initView();
 
         // method menu for each button
         btOff.setOnClickListener(new OnClickListener() {
@@ -116,6 +117,17 @@ public class main extends Activity {
 			}
 		});
 	}
+	private void initView() {
+		// TODO Auto-generated method stub
+        btCheckConnectivity = (Button) findViewById(R.id.btCheckConnectivity);
+        btOff = (Button) findViewById(R.id.btOff);
+        btStatus = (Button) findViewById(R.id.btStatus);
+        btActuate = (Button) findViewById(R.id.btActuate);
+    	btSetting = (Button) findViewById(R.id.btSetting);
+        btSchedule = (Button) findViewById(R.id.btSchedule);
+        tvStatIp = (TextView) findViewById(R.id.tvStatIp);
+	}
+	
 	// option menu
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
