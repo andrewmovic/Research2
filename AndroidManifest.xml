@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.andrew.agrieye"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="10" />
+	<uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        android:icon="@drawable/icon"
+        android:label="@string/app_name" >
+        <activity
+            android:label="@string/app_name"
+            android:name=".Splash" >
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".main" >
+            <intent-filter >
+                <action android:name="com.andrew.agrieye.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".Status" >
+            <intent-filter >
+                <action android:name="com.andrew.agrieye.STATUS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".Actuate" >
+            <intent-filter >
+                <action android:name="com.andrew.agrieye.ACTUATE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".Setting" >
+            <intent-filter >
+                <action android:name="com.andrew.agrieye.SETTING" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".AboutUs"
+            android:theme="@android:style/Theme.Dialog">
+            <intent-filter >
+                <action android:name="com.andrew.agrieye.ABOUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".Prefs">
+            <intent-filter >
+                <action android:name="com.andrew.agrieye.PREFS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/app_name"
+            android:name=".ScheduleEvent">
+            <intent-filter >
+                <action android:name="com.andrew.agrieye.SCHEDULE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AndroidAlarmService"
+			android:label="@string/app_name">
+		    <intent-filter>
+		    	<action android:name="com.andrew.agrieye.ALARM" />
+		        <category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".AndroidScheduledActivity"
+                android:label="@string/app_name">
+          <intent-filter>
+              <action android:name="com.andrew.agrieye.SCHEDULEACTIVITY" />
+              <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+      </activity>
+      <activity android:name=".AgriSchedule"
+                android:label="@string/app_name">
+          <intent-filter>
+              <action android:name="com.andrew.agrieye.AGRISCHEDULE" />
+              <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+      </activity>
+      <activity android:name=".schedule.ScheduleActivity"
+                android:label="@string/app_name">
+          <intent-filter>
+              <action android:name="com.andrew.agrieye.SCHEDULEACTIVITY2" />
+              <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
+      </activity>
+      
+		<activity android:name=".MyScheduledActivity" />
+      	<receiver
+          android:process=":remote"
+          android:name="MyScheduledReceiver" />
+		<service android:name=".MyAlarmService" />
+    </application>
+</manifest>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, main!</string>
+    <string name="app_name">Agrieye</string>
+    <string name="title">Mobile Actuator</string>
+    <string name="one_shot_alarm">One Shot Alarm</string>
+    <string name="alarm_controller">Alarm Controller</string>
+    <string name="start_repeating_alarm">Start Repeating Alarm</string>
+    <string name="stop_repeating_alarm">Stop Repeating Alarm</string>
+    <string name="one_shot_received">One Shoot Received</string>
+	<string name="one_shot_scheduled">One Shot Scheduled</string>
+	<string name="repeating_scheduled" >Repeating Schedule</string>
+	<string name="repeating_received">Repeating Received</string>
+	<string name="repeating_unscheduled">Repeating Unschedule</string>
+</resources>

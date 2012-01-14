@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	<item
+	    android:title="About Us"
+	    android:id="@+id/aboutUs"
+	    android:numericShortcut="1"
+	    android:alphabeticShortcut="a"/>
+    <item
+	    android:title="Preferences"
+	    android:id="@+id/preferences"
+	    android:numericShortcut="1"
+	    android:alphabeticShortcut="a"/>
+	<item
+	    android:title="Logout"
+	    android:id="@+id/logOut"
+	/>
+	tem
+	    android:title="About Us"
+	    android:id="@+id/aboutUs"
+	    android:numericShortcut="1"
+	    android:alphabeticShortcut="a"/>
+    <item
+	    android:title="Preferences"
+	    android:id="@+id/preferences"
+	    android:numericShortcut="1"
+	    android:alphabeticShortcut="a"/>
+	<item
+	    android:title="Logout"
+	    android:id="@+id/logOut"
+	/>
+	tem
+	    android:title="About Us"
+	    android:id="@+id/aboutUs"
+	    android:numericShortcut="1"
+	    android:alphabeticShortcut="a"/>
+    <item
+	    android:title="Preferences"
+	    android:id="@+id/preferences"
+	    android:numericShortcut="1"
+	    android:alphabeticShortcut="a"/>
+	<item
+	    android:title="Logout"
+	    android:id="@+id/logOut"
+	/>
+</menu>
