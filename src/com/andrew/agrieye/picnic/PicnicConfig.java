@@ -1,5 +1,10 @@
 package com.andrew.agrieye.picnic;
 
+/* PicnicConfig 1.0
+ * Picnic configuration for AgriEye System
+ * January 14, 2012 
+ * andrew@ugm.ac.id */
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -8,45 +13,45 @@ import java.net.URLConnection;
 import java.net.UnknownHostException;
 import android.content.SharedPreferences;
 
-/*picnic configuration files*/
-
 public class PicnicConfig {
 	private String ipAddress;
 	public String currentIpAddress;
 	private int udpPortP;
 	private int udpPortS;
-	private SharedPreferences getIpAddress;
 	private Picnic pic;
 	
-	// function to check connectivity
-	public boolean checkAvailability(){
-        String host = "192.168.64.44";		
-		// check status connectivity        
-	     try {
-	         URL url = new URL("http://"+host);
-	         URLConnection connection = url.openConnection();
-	         connection.setConnectTimeout(1000);
-	         InputStream input = connection.getInputStream();
-	         if (input != null) {
-	        	 return true;
-	         } else {
-	        	 return false;
-	         }
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        	return false;
-        } catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
+	// constructor for set Ip Address
+	public PicnicConfig(String theIpAddress) {
+		this.ipAddress = theIpAddress;
+	}
+	// method for check connectivity
+	
+	public boolean checkConnectivity(){
+		try {
+			URL url = new URL("http://"+ipAddress);
+			URLConnection connection = url.openConnection();
+			connection.setConnectTimeout(1000);
+			InputStream input = connection.getInputStream();
+			if(input != null) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (UnknownHostException e) {
+			// TODO: handle exception
 			e.printStackTrace();
 			return false;
+		} catch (MalformedURLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;	
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// TODO: handle exception
 			e.printStackTrace();
 			return false;
 		}
 	}
-
-	// if else 
+	
 	// void method to connect to picnic using load library picnic
 	public boolean connect(){
 		//currentIpAddress = getIpAddress.getString("ip","192.168.64.44");
