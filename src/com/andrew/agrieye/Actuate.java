@@ -1,5 +1,9 @@
 package com.andrew.agrieye;
 
+/* Actuation Activity v 1.0
+ * January 14, 2012 
+ * andrew@ugm.ac.id */
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,69 +15,87 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-import com.andrew.agrieye.Picnic;
 import com.andrew.agrieye.picnic.PicnicConfig;
 
+
 public class Actuate extends Activity {
-	FrameLayout frameLayoutLogo;
-	Button btOff;
-	ToggleButton tbLed4,tbLed5,tbLed6,tbLed7;
 	private Toast toast;
 	private PicnicConfig picConfig;
-	
+	private SharedPreferences getIpAddress;
+  	private static String etIpSetting;
+  	FrameLayout frameLayoutLogo;
+	Button btOff;
+	ToggleButton tbLed4,tbLed5,tbLed6,tbLed7;
+  	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.actuate);
-		picConfig = new PicnicConfig();
 		
+		// get current ip address from shared preferences
+        getIpAddress = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		etIpSetting = getIpAddress.getString("ip", "192.168.11.224");
+		
+		// pic connect
+		picConfig = new PicnicConfig(etIpSetting);
+				
 		initObject(); // object initialization method
-				// set check or unchecked for each toggle button
-		// led 4
-		if (Character.getNumericValue(statCh[4]) == 1) {
+		
+		// set check or unchecked for each toggle button
+		// toggle button 4
+		if(picConfig.checkStatus(4) == true) {
 			tbLed4.setChecked(true);
+		} else {
+			tbLed4.setChecked(false);
 		}
-		// led 5
-		if (Character.getNumericValue(statCh[5]) == 1) {
+		// set toggle button 5
+		if(picConfig.checkStatus(5) == true) {
 			tbLed5.setChecked(true);
+		} else {
+			tbLed5.setChecked(false);
 		}
-		// led 6
-		if (Character.getNumericValue(statCh[6]) == 1) {
+		// set toggle button 6
+		if(picConfig.checkStatus(6) == true) {
 			tbLed6.setChecked(true);
+		} else {
+			tbLed6.setChecked(false);
 		}
-		// led 7
-		if (Character.getNumericValue(statCh[7]) == 1) {
+		// set toggle button 7
+		if(picConfig.checkStatus(7) == true) {
 			tbLed7.setChecked(true);
-		}			
+		} else {
+			tbLed7.setChecked(false);
+		}
+		
+		// action for each toogle button
 		
 		// Toggle button LED 4
         tbLed4.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (tbLed4.isChecked()) {
-					pic.setHigh("RB", 4);
+					picConfig.turnOn(4);
 					toastOn(4);
 		        } else {
-		        	pic.setLow("RB", 4);
+		        	picConfig.turnOff(4);
 		        	toastOff(4);
 		        }
 				
 			}
 		});
+     
      // Toggle button LED 5
         tbLed5.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (tbLed5.isChecked()) {
-					pic.setHigh("RB", 5);
+					picConfig.turnOn(5);
 					toastOn(5);
 		        } else {
-		        	pic.setLow("RB", 5);
+		        	picConfig.turnOff(5);
 		        	toastOff(5);
 		        }
 				
@@ -82,60 +104,53 @@ public class Actuate extends Activity {
         
      // Toggle button LED 6
         tbLed6.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (tbLed6.isChecked()) {
-					pic.setHigh("RB", 6);
+					picConfig.turnOn(6);
 					toastOn(6);
 		        } else {
-		        	pic.setLow("RB", 6);
+		        	picConfig.turnOff(6);
 		        	toastOff(6);
 		        }
 				
 			}
-
-
 		});
+        
      // Toggle button LED 7
         tbLed7.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (tbLed7.isChecked()) {
-					pic.setHigh("RB", 7);
+					picConfig.turnOn(7);
 					toastOn(7);
 		        } else {
-		        	pic.setLow("RB", 7);
+		        	picConfig.turnOff(7);
 		        	toastOff(7);
 		        }
 				
 			}
 		});
-        
      // back home
-     		frameLayoutLogo.setOnClickListener(new OnClickListener() {
-     			
-     			@Override
-     			public void onClick(View v) {
-     				// TODO Auto-generated method stub
-     				
-     			}
-     		});
-     		
-     	// button off
-     	btOff.setOnClickListener(new OnClickListener() {
-     			
-     		@Override
-     		public void onClick(View v) {
-     			// TODO Auto-generated method stub
-     			finish();
-     		}
-     	});       
+	frameLayoutLogo.setOnClickListener(new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub			
+		}
+	});
+ 	// button back
+ 	btOff.setOnClickListener(new OnClickListener() {
+ 			
+ 		@Override
+ 		public void onClick(View v) {
+ 			// TODO Auto-generated method stub
+ 			finish();
+ 		}
+ 	});       
         
-	}
+}
 
 	private void initObject() {
 		// TODO Auto-generated method stub
@@ -162,6 +177,4 @@ public class Actuate extends Activity {
 		toast =Toast.makeText(context, messages, Toast.LENGTH_SHORT);
 		toast.show();
 	}
-	
-	
 }
