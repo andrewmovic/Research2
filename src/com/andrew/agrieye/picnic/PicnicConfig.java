@@ -17,7 +17,6 @@ public class PicnicConfig {
 	private int udpPortS;
 	private SharedPreferences getIpAddress;
 	private Picnic pic;
-	int a;
 	
 	// function to check connectivity
 	public boolean checkAvailability(){
