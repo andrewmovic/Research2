@@ -19,10 +19,6 @@ public class PicnicConfig {
 	private Picnic pic;
 	int a;
 	
-public PicnicConfig(int a) {
-		this.a = a;
-	}
-	
 	// function to check connectivity
 	public boolean checkAvailability(){
         String host = "192.168.64.44";		
