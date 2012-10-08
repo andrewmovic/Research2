@@ -26,30 +26,34 @@ public class main extends Activity {
 	private Button btStatus;
 	private Button btActuate;
 	private Button btSetting;
-	private Button btSchedule;
-	private Button btSchedule2;	
+	private Button btSchedule;	
 	private SharedPreferences getIpAddress;
   	private static String etIpSetting;
   	private TextView tvStatIp;
-  	private PicnicConfig picConfig;
   	private Toast toast;
+  	private PicnicConfig picConfig;
+  	
+  	public void picConfig(){
+  		picConfig= new PicnicConfig(etIpSetting);
+  	}
   	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        picConfig = new PicnicConfig();
-        // shared preferences
+        // get current ip address from shared preferences
         getIpAddress = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		etIpSetting = getIpAddress.getString("ip", "192.168.11.224");
 		
+        // set ip address to picnic
+		picConfig();
 		
+		// initialization view
 		initView();
 
         // method menu for each button
-        btOff.setOnClickListener(new OnClickListener() {
-			
+        btOff.setOnClickListener(new OnClickListener() {	
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -63,19 +67,27 @@ public class main extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent openStatus = new Intent("com.andrew.agrieye.STATUS");
-				startActivity(openStatus);
-			}
+				if(picConfig.checkConnectivity()== true) {
+				
+					Intent openStatus = new Intent("com.andrew.agrieye.STATUS");
+					startActivity(openStatus);
+					} else {
+						toastAv("No Connection to Picnic Board \n please check the connectivity");
+					}
+				}
 		});
           
         // button actuate
         btActuate.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent openActuate = new Intent("com.andrew.agrieye.ACTUATE");
-				startActivity(openActuate);
+				if(picConfig.checkConnectivity() == true) {
+					Intent openActuate = new Intent("com.andrew.agrieye.ACTUATE");
+					startActivity(openActuate);
+				} else {
+					toastAv("No Connection to Picnic Board \n please check the connectivity");
+				}
 			}
 		});
         
@@ -108,12 +120,11 @@ public class main extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if(picConfig.checkAvailability()== true) {
+				if(picConfig.checkConnectivity()== true) {
 					toastAv("Connection OK");
 				} else {
 					toastAv("No Connection");
 				}
-							
 			}
 		});
 	}
@@ -148,6 +159,12 @@ public class main extends Activity {
 		super.onResume();
 	}
 	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+	}
+
 	// void for toast
 	private void toastAv(String message){		
 		Context context = getApplicationContext();

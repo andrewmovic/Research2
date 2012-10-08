@@ -18,7 +18,6 @@ import com.andrew.agrieye.R;
 public class ScheduleActivity extends Activity {
 	private Button btCheck1;
 	private ToggleButton tbChannel4;
-	private PicnicConfig picConfig = new PicnicConfig();
 	private Toast toast;
 	private String currentIpAddress;
 	private SharedPreferences setting;
@@ -36,7 +35,7 @@ public class ScheduleActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				toastAv(picConfig.helloSaja());
+				
 			}	
 		});
 		
